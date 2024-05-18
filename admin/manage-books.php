@@ -142,7 +142,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                             </div>
                         </div>
-                        <!--End Advanced Tables -->
+                       
                     </div>
                 </div>
 

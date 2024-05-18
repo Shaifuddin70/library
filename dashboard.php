@@ -77,6 +77,25 @@ if (strlen($_SESSION['login']) == 0) {
               </div>
             </div>
           </a>
+          <a href="request-book.php">
+            <div class="col-md-3 col-sm-3 col-xs-6 ">
+              <div class="alert alert-warning back-widget-set text-center dbox3">
+                <i class="fa fa-recycle fa-5x"></i>
+                <?php
+                $rsts = 0;
+                $sql2 = "SELECT id from tblissuedbookdetails where StudentID=:sid and ReturnStatus=:rsts";
+                $query2 = $dbh->prepare($sql2);
+                $query2->bindParam(':sid', $sid, PDO::PARAM_STR);
+                $query2->bindParam(':rsts', $rsts, PDO::PARAM_STR);
+                $query2->execute();
+                $results2 = $query2->fetchAll(PDO::FETCH_OBJ);
+                $returnedbooks = $query2->rowCount();
+                ?>
+                <h3><?php echo htmlentities($returnedbooks); ?></h3>
+                Request New Books
+              </div>
+            </div>
+          </a>
         </div>
 
 

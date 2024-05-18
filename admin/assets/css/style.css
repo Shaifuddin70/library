@@ -232,6 +232,50 @@ body {
     background-color: transparent;
 }
 
+.dbox1 {
+    background-color: rgb(0, 16, 88);
+    box-shadow: 0 0 20px rgb(32, 26, 14);
+    color: white;
+    border: none;
+}
+
+.dbox2 {
+    background-color: #5e000d;
+    box-shadow: 0 0 20px rgb(77, 18, 25);
+    color: white;
+    border: none;
+}
+.dbox3 {
+    background-color: #00634d;
+    box-shadow: 0 0 20px rgb(240, 240, 240);
+    color: white;
+    border: none;
+}
+.dbox4 {
+    background-color: #5e4d00;
+    box-shadow: 0 0 20px rgb(255, 255, 255);
+    color: white;
+    border: none;
+}
+.dbox5 {
+    background-color: #194452;
+    box-shadow: 0 0 20px rgb(77, 18, 25);
+    color: white;
+    border: none;
+}
+.dbox6 {
+    background-color: #420f0f;
+    box-shadow: 0 0 20px rgb(77, 18, 25);
+    color: white;
+    border: none;
+}
+.dbox7 {
+    background-color: #580351;
+    box-shadow: 0 0 20px rgb(88, 18, 26);
+    color: white;
+    border: none;
+}
+
 /* =============================================================
    FOOTER SECTION STYLES
  ============================================================ */

@@ -244,15 +244,18 @@ body {
     color: white;
     border: none;
 }
+.dbox3 {
+    background-color: #035233;
+    box-shadow: 0 0 20px rgb(255, 255, 255);
+    color: white;
+    border: none;
+}
 
 .panel-heading {
     background-color: #051944 !important;
     color: white !important;
 }
 
-/* =============================================================
-   FOOTER SECTION STYLES
- ============================================================ */
 .footer-section {
     padding: 10px;
     color: #fff;
