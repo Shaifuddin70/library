@@ -49,7 +49,9 @@ if (strlen($_SESSION['login']) == 0) {
                     <div class="col-md-12">
                         <h4 class="header-line">Manage Issued Books</h4>
                     </div>
-
+                    <b>
+                        <h4 >*If you do not return the book on due date, your membership will be cancelled!</h4>
+                    </b>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -69,7 +71,7 @@ if (strlen($_SESSION['login']) == 0) {
                                                     <th>Issued Date</th>
                                                     <th>Return Date</th>
                                                     <th>Status</th>
-                                                   
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -89,7 +91,7 @@ if (strlen($_SESSION['login']) == 0) {
                                                             <td class="center"><?php echo htmlentities($result->ISBNNumber); ?></td>
                                                             <td class="center"><?php echo date('Y-m-d', strtotime($result->IssuesDate)); ?></td>
                                                             <td class="center"><?php echo date('Y-m-d', strtotime($result->ReturnDate)); ?></td>
-                                                           
+
                                                             <td class="center"><?php echo htmlentities($result->ReturnStatus == 0 ? "Not Returned" : "Returned"); ?></td>
 
                                                         </tr>

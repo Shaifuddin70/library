@@ -5,19 +5,32 @@ include('includes/config.php');
 if (strlen($_SESSION['alogin']) == 0) {
     header('location:index.php');
 } else {
-
     if (isset($_POST['return'])) {
         $rid = intval($_GET['rid']);
         $rstatus = 1;
         $sql = "UPDATE tblissuedbookdetails SET ReturnStatus=:rstatus WHERE id=:rid";
         $query = $dbh->prepare($sql);
-        $query->bindParam(':rid', $rid, PDO::PARAM_INT); // Use PDO::PARAM_INT for integer type
-        $query->bindParam(':rstatus', $rstatus, PDO::PARAM_INT); // Use PDO::PARAM_INT for integer type
+        $query->bindParam(':rid', $rid, PDO::PARAM_INT);
+        $query->bindParam(':rstatus', $rstatus, PDO::PARAM_INT);
         $query->execute();
-
+    
+        $checkSql = "SELECT * FROM tblissuedbookdetails WHERE id=:rid";
+        $checkQuery = $dbh->prepare($checkSql);
+        $checkQuery->bindParam(':rid', $rid, PDO::PARAM_INT);
+        $checkQuery->execute();
+        $row = $checkQuery->fetch(PDO::FETCH_ASSOC); // Fetch the row
+        $bookid = $row['BookId']; // Access BookId from the fetched row
+    echo $bookid;
+        $sql1 = "UPDATE tblbooks SET status='0' WHERE id=:bookid"; // Corrected SQL query
+        $query1 = $dbh->prepare($sql1);
+        $query1->bindParam(':bookid', $bookid, PDO::PARAM_INT); // Bind BookId as parameter
+        $query1->execute();
+    
         $_SESSION['msg'] = "Book Returned successfully";
-        header('location:manage-issued-books.php');
+        header('location: manage-issued-books.php');
     }
+    
+    
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

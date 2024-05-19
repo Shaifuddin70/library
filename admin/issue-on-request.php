@@ -22,6 +22,14 @@ if (strlen($_SESSION['alogin']) == 0) {
             $query->execute();
             $lastInsertId = $dbh->lastInsertId();
 
+            $sql1 = "UPDATE `tblbooks` SET `status`='1' WHERE id= $bookid";
+            $query1 = $dbh->prepare($sql1);
+            $query1->execute();
+
+            $sql1 = "UPDATE `tblbooks` SET `status`='1' WHERE id= $bookid";
+            $query1 = $dbh->prepare($sql1);
+            $query1->execute();
+
             if ($lastInsertId) {
                 // Update request status to 1
                 $sqlUpdate = "UPDATE tblrequest SET Status = 1 WHERE id = :requestid";

@@ -21,6 +21,10 @@ if (strlen($_SESSION['alogin']) == 0) {
             $query->bindParam(':returndate', $returndate, PDO::PARAM_STR);
             $query->execute();
             $lastInsertId = $dbh->lastInsertId();
+
+            $sql1 = "UPDATE `tblbooks` SET `status`='1' WHERE id= $bookid";
+            $query1 = $dbh->prepare($sql1);
+            $query1->execute();
     
             if ($lastInsertId) {
                 $_SESSION['msg'] = "Book issued successfully";
