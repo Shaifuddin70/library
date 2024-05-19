@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2024 at 09:08 PM
+-- Generation Time: May 19, 2024 at 06:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -85,7 +85,8 @@ CREATE TABLE `tblbooks` (
 --
 
 INSERT INTO `tblbooks` (`id`, `BookName`, `CatId`, `AuthorId`, `ISBNNumber`, `RegDate`, `UpdationDate`) VALUES
-(7, 'Cooding', 11, 10, 213, '2024-05-17 17:23:46', NULL);
+(7, 'Coodings', 11, 10, 213, '2024-05-17 17:23:46', '2024-05-18 15:46:26'),
+(8, 'PHP', 11, 10, 324, '2024-05-18 15:42:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,7 @@ CREATE TABLE `tblcategory` (
 --
 
 INSERT INTO `tblcategory` (`id`, `CategoryName`, `Status`, `CreationDate`, `UpdationDate`) VALUES
-(11, 'Science', 1, '2024-05-17 16:50:25', '2024-05-17 18:45:45');
+(11, 'Comedy', 1, '2024-05-17 16:50:25', '2024-05-18 15:42:02');
 
 -- --------------------------------------------------------
 
@@ -128,10 +129,34 @@ CREATE TABLE `tblissuedbookdetails` (
 --
 
 INSERT INTO `tblissuedbookdetails` (`id`, `BookId`, `StudentID`, `IssuesDate`, `ReturnDate`, `ReturnStatus`) VALUES
-(12, 7, 'SID012', '2024-05-17 17:29:26', '2024-05-17 17:37:08', 1),
-(13, 7, 'SID012', '2024-05-17 17:48:03', '2024-05-17 17:49:54', 1),
-(14, 7, 'SID012', '2024-05-17 17:54:06', '2024-05-17 17:58:27', 1),
-(15, 7, 'SID012', '2024-05-17 18:02:52', '2024-05-23 18:00:00', NULL);
+(40, 7, 'SID012', '2024-05-19 16:40:27', '2024-05-19 16:42:12', 1),
+(41, 8, 'SID012', '2024-05-19 16:41:16', '2024-05-19 16:42:10', 1),
+(42, 7, 'SID012', '2024-05-19 16:42:48', '2024-06-07 18:00:00', NULL),
+(43, 8, 'SID012', '2024-05-19 16:42:54', '2024-06-12 18:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblrequest`
+--
+
+CREATE TABLE `tblrequest` (
+  `id` int(11) NOT NULL,
+  `StudentId` varchar(11) NOT NULL,
+  `BookId` int(11) NOT NULL,
+  `status` int(11) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblrequest`
+--
+
+INSERT INTO `tblrequest` (`id`, `StudentId`, `BookId`, `status`, `date`) VALUES
+(62, 'SID012', 7, 1, '2024-05-19 16:40:12'),
+(63, 'SID012', 8, 1, '2024-05-19 16:40:13'),
+(64, 'SID012', 7, 1, '2024-05-19 16:42:17'),
+(65, 'SID012', 8, 1, '2024-05-19 16:42:17');
 
 -- --------------------------------------------------------
 
@@ -156,7 +181,8 @@ CREATE TABLE `tblstudents` (
 --
 
 INSERT INTO `tblstudents` (`id`, `StudentId`, `FullName`, `EmailId`, `MobileNumber`, `Password`, `Status`, `RegDate`, `UpdationDate`) VALUES
-(11, 'SID012', 'Shaifuddin Ahammed Rokib', 'shaifuddin70@gmail.com', '1635485720', 'e10adc3949ba59abbe56e057f20f883e', 1, '2024-05-17 15:50:44', '2024-05-17 18:06:48');
+(11, 'SID012', 'Shaifuddin Ahammed Rokib', 'shaifuddin70@gmail.com', '1635485720', 'e10adc3949ba59abbe56e057f20f883e', 1, '2024-05-17 15:50:44', '2024-05-17 18:06:48'),
+(12, 'SID013', 'Scott T.', 'haIWHD@gmail.com', '8002122120', 'e10adc3949ba59abbe56e057f20f883e', 1, '2024-05-18 15:43:13', NULL);
 
 --
 -- Indexes for dumped tables
@@ -193,6 +219,12 @@ ALTER TABLE `tblissuedbookdetails`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tblrequest`
+--
+ALTER TABLE `tblrequest`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tblstudents`
 --
 ALTER TABLE `tblstudents`
@@ -219,25 +251,31 @@ ALTER TABLE `tblauthors`
 -- AUTO_INCREMENT for table `tblbooks`
 --
 ALTER TABLE `tblbooks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tblcategory`
 --
 ALTER TABLE `tblcategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tblissuedbookdetails`
 --
 ALTER TABLE `tblissuedbookdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `tblrequest`
+--
+ALTER TABLE `tblrequest`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `tblstudents`
 --
 ALTER TABLE `tblstudents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

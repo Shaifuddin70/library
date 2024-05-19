@@ -146,7 +146,7 @@ if (strlen($_SESSION['alogin']) == 0) {
             <div class="alert alert-info back-widget-set text-center dbox7">
                 <i class="fa fa-file-archive-o fa-5x"></i>
                 <?php
-                $sql6 = "SELECT id FROM tblcategory";
+                $sql6 = "SELECT id FROM tblrequest Where status is null";
                 $query5 = $dbh->prepare($sql6);
                 $query5->execute();
                 $listdcats = $query5->rowCount();

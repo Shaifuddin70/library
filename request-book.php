@@ -9,15 +9,22 @@ if (strlen($_SESSION['login']) == 0) {
     if (isset($_GET['request'])) {
         $bookId = $_GET['request'];
         $studentId = $_SESSION['stdid'];
-
+    
         // Check if the book is already requested by the student
-        $checkSql = "SELECT * FROM tblrequest WHERE StudentId=:studentId AND BookId=:bookId AND status=1";
+        $checkSql = "SELECT * FROM tblrequest WHERE StudentId=:studentId AND BookId=:bookId AND status IS NULL";
         $checkQuery = $dbh->prepare($checkSql);
         $checkQuery->bindParam(':studentId', $studentId, PDO::PARAM_STR);
         $checkQuery->bindParam(':bookId', $bookId, PDO::PARAM_STR);
         $checkQuery->execute();
-
-        if ($checkQuery->rowCount() == 0) {
+    
+        // Check if the book is already issued to the student
+        $checkIssueSql = "SELECT * FROM tblissuedbookdetails WHERE StudentID=:studentId AND BookId=:bookId AND ReturnStatus IS NULL";
+        $checkIssueQuery = $dbh->prepare($checkIssueSql);
+        $checkIssueQuery->bindParam(':studentId', $studentId, PDO::PARAM_STR);
+        $checkIssueQuery->bindParam(':bookId', $bookId, PDO::PARAM_STR);
+        $checkIssueQuery->execute();
+    
+        if ($checkQuery->rowCount() == 0 && $checkIssueQuery->rowCount() == 0) {
             $sql = "INSERT INTO tblrequest(StudentId, BookId) VALUES(:studentId, :bookId)";
             $query = $dbh->prepare($sql);
             $query->bindParam(':studentId', $studentId, PDO::PARAM_STR);
@@ -25,12 +32,13 @@ if (strlen($_SESSION['login']) == 0) {
             $query->execute();
             $_SESSION['reqmsg'] = "Book requested successfully.";
         } else {
-            $_SESSION['reqmsg'] = "You have already requested this book and it is already issued to you.";
+            $_SESSION['reqmsg'] = "You have already requested this book Or Issued to you";
         }
-
+    
         header('location:request-book.php');
         exit();
     }
+    
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

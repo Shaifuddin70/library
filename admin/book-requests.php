@@ -89,10 +89,11 @@ if (strlen($_SESSION['alogin']) == 0) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = "SELECT r.id, s.FullName AS StudentName, b.BookName, b.ISBNNumber
+                                        $sql = "SELECT r.id,r.status, s.FullName AS StudentName, b.BookName, b.ISBNNumber
                                                 FROM tblrequest r
                                                 INNER JOIN tblstudents s ON r.StudentId = s.StudentId
-                                                INNER JOIN tblbooks b ON r.BookId = b.id";
+                                                INNER JOIN tblbooks b ON r.BookId = b.id
+                                                WHERE r.status is null";
                                         $query = $dbh->prepare($sql);
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -106,7 +107,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                             <td class="center"><?php echo htmlentities($result->BookName); ?></td>
                                             <td class="center"><?php echo htmlentities($result->ISBNNumber); ?></td>
                                             <td class="center">
-                                                <a href="request-book.php?request=<?php echo htmlentities($result->id); ?>" class="btn btn-primary">Issue</a>
+                                                <a href="issue-on-request.php?request=<?php echo htmlentities($result->id); ?>" class="btn btn-primary">Issue</a>
                                             </td>
                                         </tr>
                                         <?php $cnt = $cnt + 1;

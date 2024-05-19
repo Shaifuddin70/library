@@ -58,16 +58,15 @@ if (strlen($_SESSION['login']) == 0) {
               </div>
             </div>
           </a>
-          <a href="issued-books.php">
+          <a href="not-returned.php">
             <div class="col-md-3 col-sm-3 col-xs-6 ">
               <div class="alert alert-warning back-widget-set text-center dbox2">
                 <i class="fa fa-recycle fa-5x"></i>
                 <?php
-                $rsts = 0;
-                $sql2 = "SELECT id from tblissuedbookdetails where StudentID=:sid and ReturnStatus=:rsts";
+     
+                $sql2 = "SELECT id from tblissuedbookdetails where StudentID=:sid and ReturnStatus is null";
                 $query2 = $dbh->prepare($sql2);
                 $query2->bindParam(':sid', $sid, PDO::PARAM_STR);
-                $query2->bindParam(':rsts', $rsts, PDO::PARAM_STR);
                 $query2->execute();
                 $results2 = $query2->fetchAll(PDO::FETCH_OBJ);
                 $returnedbooks = $query2->rowCount();
@@ -83,7 +82,7 @@ if (strlen($_SESSION['login']) == 0) {
                 <i class="fa fa-recycle fa-5x"></i>
                 <?php
                 $rsts = 0;
-                $sql2 = "SELECT id from tblissuedbookdetails where StudentID=:sid and ReturnStatus=:rsts";
+                $sql2 = "SELECT id from tblrequest where StudentID=:sid and status=:rsts";
                 $query2 = $dbh->prepare($sql2);
                 $query2->bindParam(':sid', $sid, PDO::PARAM_STR);
                 $query2->bindParam(':rsts', $rsts, PDO::PARAM_STR);
